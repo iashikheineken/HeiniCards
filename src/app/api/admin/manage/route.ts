@@ -15,17 +15,43 @@ export async function POST(request: Request) {
       return Response.json({ error: 'action and targetUsername required' }, { status: 400 });
     }
 
-    // Find target user by username
-    const cleanUsername = targetUsername.replace('@', '');
-    const { data: target, error: findError } = await supabase
+    // Find target user by username, display_name, or telegram_id
+    const cleanInput = targetUsername.replace('@', '').trim();
+    let target: any = null;
+
+    // Try by username (exact)
+    const { data: byUsername } = await supabase
       .from('users')
       .select('*')
-      .eq('username', cleanUsername)
+      .eq('username', cleanInput)
       .single();
+    target = byUsername;
 
-    if (findError || !target) {
-      return Response.json({ error: `Пользователь @${cleanUsername} не найден` }, { status: 404 });
+    // Try by display_name (case-insensitive)
+    if (!target) {
+      const { data: byName } = await supabase
+        .from('users')
+        .select('*')
+        .ilike('display_name', cleanInput)
+        .single();
+      target = byName;
     }
+
+    // Try by telegram_id (if it's a number)
+    if (!target && /^\d+$/.test(cleanInput)) {
+      const { data: byTgId } = await supabase
+        .from('users')
+        .select('*')
+        .eq('telegram_id', parseInt(cleanInput))
+        .single();
+      target = byTgId;
+    }
+
+    if (!target) {
+      return Response.json({ error: `Пользователь "${cleanInput}" не найден. Попробуй другое имя или telegram_id` }, { status: 404 });
+    }
+
+    const displayLabel = target.display_name || target.username || target.telegram_id;
 
     switch (action) {
       case 'set_admin': {
@@ -36,7 +62,7 @@ export async function POST(request: Request) {
         if (error) return Response.json({ error: error.message }, { status: 500 });
         return Response.json({
           success: true,
-          message: `✅ @${cleanUsername} теперь админ!`,
+          message: `✅ ${displayLabel} теперь админ!`,
         });
       }
 
@@ -51,7 +77,7 @@ export async function POST(request: Request) {
         if (error) return Response.json({ error: error.message }, { status: 500 });
         return Response.json({
           success: true,
-          message: `✅ @${cleanUsername} больше не админ`,
+          message: `✅ ${displayLabel} больше не админ`,
         });
       }
 
@@ -67,7 +93,7 @@ export async function POST(request: Request) {
         if (error) return Response.json({ error: error.message }, { status: 500 });
         return Response.json({
           success: true,
-          message: `✅ Баланс @${cleanUsername}: ${amount} 🪙`,
+          message: `✅ Баланс ${displayLabel}: ${amount} 🪙`,
         });
       }
 
@@ -84,7 +110,7 @@ export async function POST(request: Request) {
         if (error) return Response.json({ error: error.message }, { status: 500 });
         return Response.json({
           success: true,
-          message: `✅ @${cleanUsername}: ${target.balance} → ${Math.max(0, newBalance)} 🪙 (${amount >= 0 ? '+' : ''}${amount})`,
+          message: `✅ ${displayLabel}: ${target.balance} → ${Math.max(0, newBalance)} 🪙 (${amount >= 0 ? '+' : ''}${amount})`,
         });
       }
 

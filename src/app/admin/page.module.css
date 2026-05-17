@@ -203,6 +203,14 @@
   gap: 10px;
   max-width: 100%;
   overflow: hidden;
+  box-sizing: border-box;
+}
+
+.formGrid input,
+.formGrid textarea,
+.formGrid select {
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .field {
@@ -299,18 +307,24 @@
 .uploadRow {
   display: flex;
   gap: 6px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .uploadRow input {
   flex: 1;
+  min-width: 0;
   background: var(--bg-card);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 6px;
   padding: 8px 10px;
   color: var(--text-primary);
-  font-size: 13px;
+  font-size: 12px;
   font-family: var(--font-body);
   outline: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
 }
 
 .uploadBtn {
@@ -322,6 +336,7 @@
   cursor: pointer;
   font-size: 16px;
   transition: all 0.2s;
+  flex-shrink: 0;
 }
 
 .uploadBtn:hover:not(:disabled) {

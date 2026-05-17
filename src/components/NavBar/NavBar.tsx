@@ -11,7 +11,6 @@ const tabs = [
   { path: '/inventory', label: 'Карты', icon: '🎒' },
   { path: '/market', label: 'Маркет', icon: '💰' },
   { path: '/quests', label: 'Квесты', icon: '📋' },
-  { path: '/pass', label: 'Пасс', icon: '🐷' },
 ];
 
 export default function NavBar() {

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import styles from './page.module.css';
 import { useUser } from '@/context/UserContext';
 import { useToast } from '@/components/Toast/Toast';
@@ -10,6 +11,7 @@ import LoadingSkeleton from '@/components/LoadingSkeleton/LoadingSkeleton';
 export default function HomePage() {
   const { user, allCards, inventory, loading, refreshUser } = useUser();
   const { showToast } = useToast();
+  const router = useRouter();
   const [claiming, setClaiming] = useState(false);
   const [claimed, setClaimed] = useState(false);
 
@@ -134,15 +136,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* SvinoPass teaser */}
-      <section className={styles.svinopassBanner}>
+      {/* SvinoPass banner */}
+      <section className={styles.svinopassBanner} onClick={() => router.push('/pass')} style={{ cursor: 'pointer' }}>
         <div className={styles.svinopassInner}>
           <div className={styles.svinopassBadge}>🐷</div>
           <div className={styles.svinopassText}>
             <span className={styles.svinopassTitle}>SVINO PASS</span>
-            <span className={styles.svinopassSub}>Сезон 1 • Скоро</span>
+            <span className={styles.svinopassSub}>Сезон 1 • Качай XP!</span>
           </div>
-          <div className={styles.svinopassTag}>SOON</div>
+          <div className={styles.svinopassTag}>→</div>
         </div>
       </section>
     </main>
