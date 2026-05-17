@@ -1,0 +1,335 @@
+/* ============================
+   Home Page Styles
+   ============================ */
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 20px 0 10px;
+}
+
+.logoBlock {
+  margin-bottom: 16px;
+}
+
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.logoGlitch {
+  font-family: var(--font-pixel);
+  font-size: 28px;
+  color: var(--neon-pink);
+  text-shadow:
+    0 0 10px var(--neon-pink),
+    0 0 20px var(--neon-pink),
+    0 0 40px var(--neon-pink);
+  animation: glitchText 4s ease-in-out infinite;
+  position: relative;
+}
+
+.logoGlitch::before,
+.logoGlitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.logoGlitch::before {
+  color: var(--neon-cyan);
+  animation: glitch 3s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+  opacity: 0.6;
+}
+
+.logoGlitch::after {
+  color: var(--neon-yellow);
+  animation: glitch 2s infinite reverse;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+  opacity: 0.6;
+}
+
+.logoCards {
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  color: var(--text-primary);
+  letter-spacing: 12px;
+  opacity: 0.7;
+}
+
+.tagline {
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  color: var(--text-muted);
+  letter-spacing: 3px;
+  margin-top: 8px;
+}
+
+/* Balance bar */
+.balanceBar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 20px;
+  padding: 8px 16px;
+  margin-top: 12px;
+}
+
+.balanceIcon {
+  font-size: 18px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.balanceAmount {
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  color: var(--coin-color);
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+.balanceLabel {
+  font-family: var(--font-pixel);
+  font-size: 5px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+/* Daily reward banner */
+.dailyBanner {
+  margin: 16px 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(57, 255, 20, 0.08), rgba(0, 255, 255, 0.08));
+  border: 1px solid rgba(57, 255, 20, 0.2);
+  overflow: hidden;
+  animation: slideUp 0.5s ease;
+}
+
+.dailyInner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+}
+
+.dailyIcon {
+  font-size: 28px;
+  animation: float 2s ease-in-out infinite;
+}
+
+.dailyText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dailyTitle {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--neon-green);
+  text-shadow: 0 0 6px rgba(57, 255, 20, 0.4);
+}
+
+.dailySub {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.dailyBtn {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--neon-green);
+  background: rgba(57, 255, 20, 0.1);
+  color: var(--neon-green);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dailyBtn:hover:not(:disabled) {
+  background: rgba(57, 255, 20, 0.2);
+  box-shadow: 0 0 12px rgba(57, 255, 20, 0.3);
+}
+
+.dailyBtnClaimed {
+  border-color: var(--text-muted);
+  color: var(--text-muted);
+  background: transparent;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Section */
+.section {
+  margin: 20px 0;
+  animation: slideUp 0.5s ease backwards;
+}
+
+.section:nth-child(3) { animation-delay: 0.1s; }
+.section:nth-child(4) { animation-delay: 0.2s; }
+.section:nth-child(5) { animation-delay: 0.3s; }
+
+.sectionTitle {
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 1px;
+}
+
+.sectionIcon {
+  font-size: 16px;
+}
+
+/* Featured cards grid */
+.featuredGrid {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 4px 0;
+}
+
+.featuredItem {
+  animation: slideUp 0.5s ease backwards;
+}
+
+/* Stats grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.statCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 12px 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.statNum {
+  font-family: var(--font-pixel);
+  font-size: 18px;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
+}
+
+.statLabel {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* Quick actions */
+.quickActions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.actionBtnPrimary,
+.actionBtnSecondary {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.actionBtnPrimary {
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.15), rgba(0, 255, 255, 0.15));
+  border: 1px solid var(--neon-pink);
+  color: var(--neon-pink);
+  text-shadow: 0 0 8px var(--neon-pink);
+}
+
+.actionBtnPrimary:hover {
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.25), rgba(0, 255, 255, 0.25));
+  box-shadow: 0 0 20px rgba(255, 0, 255, 0.2);
+}
+
+.actionBtnSecondary {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+}
+
+.actionBtnSecondary:hover {
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.15);
+}
+
+/* SvinoPass banner */
+.svinopassBanner {
+  margin: 20px 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.06), rgba(255, 136, 0, 0.06));
+  border: 1px solid rgba(255, 0, 255, 0.15);
+  overflow: hidden;
+  animation: slideUp 0.6s ease backwards;
+  animation-delay: 0.4s;
+}
+
+.svinopassInner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px;
+}
+
+.svinopassBadge {
+  font-size: 30px;
+  animation: sway 3s ease-in-out infinite;
+}
+
+.svinopassText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.svinopassTitle {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--neon-pink);
+  text-shadow: 0 0 6px rgba(255, 0, 255, 0.4);
+}
+
+.svinopassSub {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.svinopassTag {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(255, 0, 255, 0.15);
+  color: var(--neon-pink);
+  border: 1px solid rgba(255, 0, 255, 0.3);
+  animation: pulseGlow 2s ease-in-out infinite;
+}

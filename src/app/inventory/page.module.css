@@ -1,0 +1,165 @@
+/* ============================
+   Inventory Page Styles
+   ============================ */
+
+.invHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  margin-bottom: 4px;
+}
+
+.invTitle {
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.invCount {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  padding: 6px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 2px;
+  scrollbar-width: none;
+}
+
+.filters::-webkit-scrollbar {
+  display: none;
+}
+
+.filterBtn {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.filterBtn:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-secondary);
+}
+
+.filterActive {
+  border-color: var(--neon-pink);
+  color: var(--neon-pink);
+  background: rgba(255, 0, 255, 0.1);
+  text-shadow: 0 0 6px rgba(255, 0, 255, 0.4);
+}
+
+.filterActive[data-rank="S"] {
+  border-color: var(--rank-s);
+  color: var(--rank-s);
+  background: rgba(255, 0, 255, 0.1);
+}
+
+.filterActive[data-rank="A"] {
+  border-color: var(--rank-a);
+  color: var(--rank-a);
+  background: rgba(255, 215, 0, 0.1);
+}
+
+.filterActive[data-rank="B"] {
+  border-color: var(--rank-b);
+  color: var(--rank-b);
+  background: rgba(192, 192, 192, 0.1);
+}
+
+.filterActive[data-rank="C"] {
+  border-color: var(--rank-c);
+  color: var(--rank-c);
+  background: rgba(205, 127, 50, 0.1);
+}
+
+.filterCount {
+  font-size: 7px;
+  opacity: 0.6;
+}
+
+/* Cards grid */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  animation: slideUp 0.4s ease;
+}
+
+.cardItem {
+  display: flex;
+  justify-content: center;
+  animation: slideUp 0.4s ease backwards;
+}
+
+/* Empty state */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.emptyText {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+/* Card with duplicate count */
+.cardWithCount {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.duplicateBadge {
+  position: absolute;
+  top: -4px;
+  right: -2px;
+  background: var(--neon-pink);
+  color: #000;
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 6px;
+  z-index: 5;
+  box-shadow: 0 0 8px var(--neon-pink);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+

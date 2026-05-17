@@ -1,0 +1,274 @@
+/* ============================================
+   HEINI CARDS — Design System (Balatro Style)
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ---------- CSS Variables ---------- */
+:root {
+  /* Core colors */
+  --bg-dark: #0a0a0f;
+  --bg-surface: #12121a;
+  --bg-card: #1a1a28;
+  --bg-elevated: #222236;
+
+  /* Neon palette */
+  --neon-green: #39ff14;
+  --neon-pink: #ff00ff;
+  --neon-cyan: #00ffff;
+  --neon-yellow: #ffff00;
+  --neon-red: #ff3333;
+  --neon-orange: #ff8800;
+
+  /* Rank colors */
+  --rank-s: #ff00ff;
+  --rank-a: #ffd700;
+  --rank-b: #c0c0c0;
+  --rank-c: #cd7f32;
+
+  /* Text */
+  --text-primary: #e8e8ff;
+  --text-secondary: #8888aa;
+  --text-muted: #555577;
+
+  /* Coin */
+  --coin-color: #ffd700;
+
+  /* Spacing */
+  --nav-height: 64px;
+
+  /* Fonts */
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* ---------- Reset & Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- CRT Overlay ---------- */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.08) 2px,
+      rgba(0, 0, 0, 0.08) 4px
+    );
+  mix-blend-mode: multiply;
+}
+
+/* Vignette effect */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 50%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--neon-pink);
+  border-radius: 2px;
+}
+
+/* ---------- Glitch Animation ---------- */
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 1px); }
+  40% { transform: translate(2px, -1px); }
+  60% { transform: translate(-1px, -2px); }
+  80% { transform: translate(1px, 2px); }
+}
+
+@keyframes glitchText {
+  0%, 100% {
+    text-shadow:
+      2px 0 var(--neon-cyan),
+      -2px 0 var(--neon-pink);
+  }
+  25% {
+    text-shadow:
+      -2px 0 var(--neon-cyan),
+      2px 0 var(--neon-pink);
+  }
+  50% {
+    text-shadow:
+      2px -1px var(--neon-cyan),
+      -2px 1px var(--neon-pink);
+  }
+  75% {
+    text-shadow:
+      -1px 2px var(--neon-cyan),
+      1px -2px var(--neon-pink);
+  }
+}
+
+/* ---------- Card Sway ---------- */
+@keyframes sway {
+  0%, 100% { transform: rotate(-0.5deg); }
+  50% { transform: rotate(0.5deg); }
+}
+
+/* ---------- S-Rank Holographic ---------- */
+@keyframes holoShift {
+  0% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+  50% { background-position: 100% 50%; filter: hue-rotate(45deg); }
+  100% { background-position: 0% 50%; filter: hue-rotate(0deg); }
+}
+
+@keyframes holoBorder {
+  0%, 100% {
+    border-color: #ff00ff;
+    box-shadow: 0 0 15px #ff00ff80, inset 0 0 15px #ff00ff20;
+  }
+  25% {
+    border-color: #00ffff;
+    box-shadow: 0 0 15px #00ffff80, inset 0 0 15px #00ffff20;
+  }
+  50% {
+    border-color: #ffff00;
+    box-shadow: 0 0 15px #ffff0080, inset 0 0 15px #ffff0020;
+  }
+  75% {
+    border-color: #ff00ff;
+    box-shadow: 0 0 15px #ff00ff80, inset 0 0 15px #ff00ff20;
+  }
+}
+
+/* ---------- Float Animation ---------- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* ---------- Pulse Glow ---------- */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ---------- Slide Up ---------- */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Coin Spin ---------- */
+@keyframes coinSpin {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
+
+/* ---------- Background Noise ---------- */
+@keyframes noiseMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 200px 200px; }
+}
+
+/* ---------- Page Container ---------- */
+.page {
+  padding: 16px;
+  padding-bottom: calc(var(--nav-height) + 24px);
+  min-height: 100vh;
+  min-height: 100dvh;
+  position: relative;
+}
+
+.page-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(255, 0, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(0, 255, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(57, 255, 20, 0.03) 0%, transparent 50%),
+    var(--bg-dark);
+}
+
+/* ---------- Typography ---------- */
+.title-pixel {
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 1.6;
+}
+
+.text-glow-pink {
+  text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+  color: var(--neon-pink);
+}
+
+.text-glow-green {
+  text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
+  color: var(--neon-green);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+  color: var(--neon-cyan);
+}
+
+/* ---------- Utility ---------- */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.grid-packs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}

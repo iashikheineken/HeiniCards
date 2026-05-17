@@ -1,0 +1,149 @@
+/* RouletteScreen */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(5, 5, 10, 0.96);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  max-height: 100vh;
+  max-height: 100dvh;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  padding: 16px 0;
+}
+
+.title {
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  color: var(--neon-pink);
+  text-shadow: 0 0 10px var(--neon-pink);
+  animation: glitchText 4s ease-in-out infinite;
+}
+
+.subtitle {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  color: var(--text-muted);
+  margin-top: 8px;
+  letter-spacing: 2px;
+}
+
+/* Roulettes container */
+.roulettes {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 0;
+}
+
+/* Results */
+.results {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: slideUp 0.5s ease;
+}
+
+.resultsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%;
+  padding: 12px 0;
+  max-width: 360px;
+}
+
+/* When 7 cards: use different layout */
+.resultsGrid:has(:nth-child(7)) {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.resultsGrid:has(:nth-child(5)):not(:has(:nth-child(6))) {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.resultItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  animation: slideUp 0.4s ease backwards;
+}
+
+.resultRank {
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 6px currentColor;
+}
+
+/* Collect button */
+.collectBtn {
+  margin-top: 16px;
+  width: 100%;
+  max-width: 300px;
+  padding: 14px;
+  border-radius: 10px;
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(57, 255, 20, 0.15), rgba(0, 255, 255, 0.15));
+  border: 2px solid var(--neon-green);
+  color: var(--neon-green);
+  text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
+  transition: all 0.2s;
+  animation: pulseGlow 2s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.collectBtn:hover {
+  background: linear-gradient(135deg, rgba(57, 255, 20, 0.25), rgba(0, 255, 255, 0.25));
+  box-shadow: 0 0 24px rgba(57, 255, 20, 0.3);
+}
+
+/* Skip button */
+.skipBtn {
+  margin: 16px auto 0;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-muted);
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.skipBtn:hover {
+  border-color: var(--neon-cyan);
+  color: var(--neon-cyan);
+}

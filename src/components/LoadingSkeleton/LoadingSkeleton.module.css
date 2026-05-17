@@ -1,0 +1,100 @@
+/* Loading Skeleton */
+
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: 200px 0; }
+}
+
+.skelBase {
+  background: linear-gradient(90deg, var(--bg-card) 25%, var(--bg-elevated) 50%, var(--bg-card) 75%);
+  background-size: 400px 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* Page skeleton */
+.pageSkeleton {
+  padding: 20px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.headerSkel {
+  composes: skelBase;
+  height: 80px;
+  border-radius: 12px;
+}
+
+.bannerSkel {
+  composes: skelBase;
+  height: 60px;
+  border-radius: 12px;
+}
+
+.sectionSkel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Line */
+.lineSkel {
+  composes: skelBase;
+  height: 12px;
+  margin-bottom: 4px;
+}
+
+/* Cards grid */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.cardSkeleton {
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.cardArtSkel {
+  composes: skelBase;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.cardInfoSkel {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Packs grid */
+.packsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.packSkeleton {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.packCoverSkel {
+  composes: skelBase;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+}
+
+.packInfoSkel {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}

@@ -1,0 +1,91 @@
+/* NavBar */
+.navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(10, 10, 15, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(255, 0, 255, 0.2);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.navInner {
+  display: flex;
+  height: var(--nav-height);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.navItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  position: relative;
+  transition: color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navItem:hover {
+  color: var(--text-secondary);
+}
+
+.active {
+  color: var(--neon-pink);
+}
+
+.navIcon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.navLabel {
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.active .navLabel {
+  text-shadow: 0 0 8px var(--neon-pink);
+}
+
+.activeIndicator {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 2px;
+  background: var(--neon-pink);
+  box-shadow: 0 0 8px var(--neon-pink), 0 0 16px var(--neon-pink);
+  border-radius: 0 0 4px 4px;
+}
+
+/* Admin tab special styling */
+.adminTab {
+  color: var(--text-muted);
+}
+
+.adminTab.active {
+  color: var(--neon-cyan);
+}
+
+.adminTab.active .navLabel {
+  text-shadow: 0 0 8px var(--neon-cyan);
+}
+
+.adminTab .activeIndicator {
+  background: var(--neon-cyan);
+  box-shadow: 0 0 8px var(--neon-cyan), 0 0 16px var(--neon-cyan);
+}
+

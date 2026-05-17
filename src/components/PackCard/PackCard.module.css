@@ -1,0 +1,74 @@
+/* PackCard */
+.packWrapper {
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: slideUp 0.5s ease backwards;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.packWrapper:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(255, 0, 255, 0.15);
+}
+
+.packWrapper:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.packCover {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.packEmoji {
+  font-size: 3rem;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3));
+  z-index: 1;
+}
+
+
+.packInfo {
+  padding: 10px;
+}
+
+.packName {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.packMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.packCards {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.packPrice {
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  color: var(--coin-color);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  text-shadow: 0 0 6px rgba(255, 215, 0, 0.4);
+}
+
+.coinIcon {
+  font-size: 12px;
+}

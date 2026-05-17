@@ -1,0 +1,215 @@
+/* ============================
+   Shop Page Styles
+   ============================ */
+
+.shopHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  margin-bottom: 8px;
+}
+
+.shopTitle {
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shopBalance {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card);
+  padding: 6px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.balanceNum {
+  font-family: var(--font-pixel);
+  font-size: 11px;
+  color: var(--coin-color);
+  text-shadow: 0 0 6px rgba(255, 215, 0, 0.4);
+}
+
+.packSection {
+  animation: slideUp 0.4s ease;
+}
+
+.sectionTitle {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+/* Pack preview modal */
+.packModalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.packModal {
+  background: var(--bg-surface);
+  border: 1px solid rgba(255, 0, 255, 0.15);
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideUpModal 0.3s ease;
+}
+
+@keyframes slideUpModal {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+.closeBtn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.closeBtn:hover {
+  background: rgba(255, 0, 255, 0.2);
+  color: var(--neon-pink);
+}
+
+/* Pack modal header */
+.packModalHeader {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.packModalCover {
+  width: 80px;
+  height: 100px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.packModalEmoji {
+  font-size: 2.5rem;
+}
+
+.packModalInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 4px;
+}
+
+.packModalName {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.packModalDesc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.packModalPrice {
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  color: var(--coin-color);
+  text-shadow: 0 0 6px rgba(255, 215, 0, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Pack cards section */
+.packCardsSection {
+  margin: 16px 0;
+}
+
+.packCardsTitle {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.packCardsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.packCardsGrid > * {
+  width: calc(33.33% - 6px);
+  max-width: 100px;
+}
+
+/* Buy button */
+.buyBtn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  font-family: var(--font-pixel);
+  font-size: 9px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  background: linear-gradient(135deg, rgba(57, 255, 20, 0.15), rgba(0, 255, 255, 0.15));
+  border: 1px solid var(--neon-green);
+  color: var(--neon-green);
+  text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.buyBtn:hover:not(:disabled) {
+  background: linear-gradient(135deg, rgba(57, 255, 20, 0.25), rgba(0, 255, 255, 0.25));
+  box-shadow: 0 0 20px rgba(57, 255, 20, 0.2);
+}
+
+.buyBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: var(--text-muted);
+  color: var(--text-muted);
+  text-shadow: none;
+}

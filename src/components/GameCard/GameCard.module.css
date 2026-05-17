@@ -1,0 +1,232 @@
+/* ============================
+   GameCard Component Styles
+   ============================ */
+
+.cardWrapper {
+  cursor: pointer;
+  animation: sway 4s ease-in-out infinite;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  perspective: 600px;
+  user-select: none;
+}
+
+.cardWrapper:hover {
+  transform: translateY(-6px) scale(1.03);
+  filter: brightness(1.1);
+  animation-play-state: paused;
+}
+
+.cardWrapper:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+/* Sizes */
+.small {
+  width: 100%;
+  max-width: 110px;
+}
+
+.medium {
+  width: 100%;
+  max-width: 160px;
+}
+
+.large {
+  width: 100%;
+  max-width: 260px;
+}
+
+/* Card border / frame */
+.cardBorder {
+  border: 2px solid;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--bg-card);
+  position: relative;
+  transition: box-shadow 0.3s ease;
+}
+
+/* S-rank holographic border animation */
+.holoBorder {
+  animation: holoBorder 3s ease-in-out infinite;
+  border-width: 3px;
+}
+
+/* Art area */
+.cardArt {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cardEmoji {
+  font-size: 2.5rem;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4));
+  z-index: 1;
+}
+
+.small .cardEmoji {
+  font-size: 1.5rem;
+}
+
+.large .cardEmoji {
+  font-size: 4rem;
+}
+
+/* Art image (replaces emoji when art_url is set) */
+.artImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Frame overlay (transparent PNG from season) */
+.frameOverlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* S-rank holographic overlay */
+.holoOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(255, 0, 255, 0.15) 20%,
+    transparent 40%,
+    rgba(0, 255, 255, 0.15) 60%,
+    transparent 80%,
+    rgba(255, 255, 0, 0.15) 100%
+  );
+  background-size: 200% 200%;
+  animation: holoShift 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Info area */
+.cardInfo {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: linear-gradient(180deg, var(--bg-card) 0%, rgba(10, 10, 15, 0.95) 100%);
+}
+
+.cardName {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  text-align: center;
+  color: var(--text-primary);
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+}
+
+.small .cardName {
+  font-size: 5px;
+}
+
+.large .cardName {
+  font-size: 10px;
+}
+
+/* Rank badge */
+.rankBadge {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 4px;
+  letter-spacing: 2px;
+}
+
+.rankBadgeS {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.small .rankBadge {
+  font-size: 7px;
+  padding: 1px 5px;
+}
+
+.large .rankBadge {
+  font-size: 14px;
+  padding: 4px 12px;
+}
+
+/* Description */
+.cardDescription {
+  font-size: 10px;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.5;
+  padding: 4px 2px;
+  max-height: 60px;
+  overflow: hidden;
+}
+
+.large .cardDescription {
+  font-size: 13px;
+  max-height: none;
+  padding: 6px 4px;
+}
+
+/* Stats */
+.cardStats {
+  display: flex;
+  gap: 12px;
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  padding-top: 4px;
+}
+
+.small .cardStats {
+  font-size: 6px;
+  gap: 6px;
+}
+
+.large .cardStats {
+  font-size: 11px;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+.statAttack {
+  color: var(--neon-red);
+  text-shadow: 0 0 6px rgba(255, 51, 51, 0.5);
+}
+
+.statDefense {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.5);
+}
+
+/* S-rank special glow on wrapper */
+.sRank .cardBorder {
+  position: relative;
+}
+
+.sRank .cardBorder::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+  background-size: 300% 300%;
+  animation: holoShift 3s ease-in-out infinite;
+  z-index: -1;
+  opacity: 0.5;
+}
