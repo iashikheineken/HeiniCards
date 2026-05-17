@@ -85,6 +85,7 @@ export async function fetchPacks() {
         cardCount: pack.card_count,
         gradient: pack.gradient || 'linear-gradient(135deg, #1a1a28, #0a0a0f)',
         emoji: pack.emoji || '📦',
+        cover_url: pack.cover_url || '',
         cards: packCards,
         cardIds,
       };

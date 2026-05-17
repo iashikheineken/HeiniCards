@@ -3,6 +3,7 @@ import Script from 'next/script';
 import './globals.css';
 import NavBar from '@/components/NavBar/NavBar';
 import { UserProvider } from '@/context/UserContext';
+import { ToastProvider } from '@/components/Toast/Toast';
 import TelegramInit from '@/components/TelegramInit/TelegramInit';
 
 export const metadata: Metadata = {
@@ -33,11 +34,13 @@ export default function RootLayout({
       </head>
       <body>
         <div className="page-bg" />
-        <UserProvider>
-          <TelegramInit />
-          {children}
-          <NavBar />
-        </UserProvider>
+        <ToastProvider>
+          <UserProvider>
+            <TelegramInit />
+            {children}
+            <NavBar />
+          </UserProvider>
+        </ToastProvider>
       </body>
     </html>
   );

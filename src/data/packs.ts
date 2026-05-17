@@ -4,9 +4,10 @@ export interface Pack {
   description: string;
   price: number;
   cardCount: number;
-  cardIds: string[]; // which cards can drop from this pack
+  cardIds: string[];
   gradient: string;
   emoji: string;
+  cover_url?: string;
 }
 
 export const packs: Pack[] = [

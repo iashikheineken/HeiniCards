@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { fetchOrCreateUser, fetchUserInventory, fetchCards } from '@/lib/api';
 import { getTelegramUserId } from '@/lib/telegram';
 import type { InventoryCard } from '@/lib/api';
@@ -40,9 +40,13 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Store the resolved telegram_id so refreshUser always uses the correct one
+  const telegramIdRef = useRef<number>(DEV_TELEGRAM_ID);
+
   const refreshUser = useCallback(async () => {
     try {
-      const userData = await fetchOrCreateUser(DEV_TELEGRAM_ID);
+      // Always use the stored telegram_id (resolved once on init)
+      const userData = await fetchOrCreateUser(telegramIdRef.current);
       if (userData) {
         setUser(userData as DbUser);
       }
@@ -69,7 +73,10 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         const cards = await fetchCards();
         setAllCards(cards);
 
+        // Resolve telegram_id ONCE and store it
         const telegramId = getTelegramUserId();
+        telegramIdRef.current = telegramId;
+
         const userData = await fetchOrCreateUser(telegramId);
         if (userData) {
           setUser(userData as DbUser);

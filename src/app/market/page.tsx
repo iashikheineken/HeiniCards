@@ -10,6 +10,8 @@ import type { Card } from '@/data/cards';
 import GameCard from '@/components/GameCard/GameCard';
 import CardModal from '@/components/CardModal/CardModal';
 import LoadingSkeleton from '@/components/LoadingSkeleton/LoadingSkeleton';
+import { useToast } from '@/components/Toast/Toast';
+import { haptic } from '@/lib/telegram';
 
 interface MarketListing {
   id: string;
@@ -24,6 +26,7 @@ interface MarketListing {
 
 export default function MarketPage() {
   const { user, inventory, refreshUser, refreshInventory } = useUser();
+  const { showToast } = useToast();
   const [listings, setListings] = useState<MarketListing[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCard, setSelectedCard] = useState<Card | null>(null);
@@ -60,11 +63,11 @@ export default function MarketPage() {
   const handleBuy = async (listingItem: MarketListing) => {
     if (!user || buying) return;
     if (balance < listingItem.price) {
-      alert('Недостаточно монет!');
+      showToast('Недостаточно монет!', 'warning', '🪙');
       return;
     }
     if (listingItem.seller_id === user.id) {
-      alert('Нельзя купить свою карту!');
+      showToast('Нельзя купить свою карту!', 'warning');
       return;
     }
 
@@ -81,15 +84,16 @@ export default function MarketPage() {
       });
       const data = await res.json();
       if (data.success) {
-        alert(`✅ Купил "${card.name}" за ${data.price} 🪙!`);
+        haptic.success();
+        showToast(`Купил "${card.name}" за ${data.price} 🪙!`, 'success', '💰');
         setSelectedListing(null);
         setSelectedCard(null);
         await Promise.all([refreshUser(), refreshInventory(), loadListings()]);
       } else {
-        alert(data.error || 'Ошибка покупки');
+        showToast(data.error || 'Ошибка покупки', 'error');
       }
     } catch (e) {
-      alert('Ошибка соединения');
+      showToast('Ошибка соединения', 'error');
     } finally {
       setBuying(false);
     }
@@ -109,20 +113,20 @@ export default function MarketPage() {
       });
       const data = await res.json();
       if (data.success) {
-        alert('Карта снята с продажи');
+        showToast('Карта снята с продажи', 'success', '↩️');
         await Promise.all([refreshInventory(), loadListings()]);
       } else {
-        alert(data.error);
+        showToast(data.error, 'error');
       }
     } catch (e) {
-      alert('Ошибка');
+      showToast('Ошибка', 'error');
     }
   };
 
   // List card for sale
   const handleSell = async () => {
     if (!user || !sellCard || listing) return;
-    if (sellPrice < 1) { alert('Цена должна быть больше 0'); return; }
+    if (sellPrice < 1) { showToast('Цена должна быть больше 0', 'warning'); return; }
 
     setListing(true);
     try {
@@ -137,15 +141,16 @@ export default function MarketPage() {
       });
       const data = await res.json();
       if (data.success) {
-        alert(`"${sellCard.name}" выставлена за ${sellPrice} 🪙!`);
+        haptic.success();
+        showToast(`"${sellCard.name}" выставлена за ${sellPrice} 🪙!`, 'success', '💰');
         setShowSellModal(false);
         setSellCard(null);
         await Promise.all([refreshInventory(), loadListings()]);
       } else {
-        alert(data.error || 'Ошибка');
+        showToast(data.error || 'Ошибка', 'error');
       }
     } catch (e) {
-      alert('Ошибка');
+      showToast('Ошибка', 'error');
     } finally {
       setListing(false);
     }

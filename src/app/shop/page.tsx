@@ -6,6 +6,7 @@ import { useUser } from '@/context/UserContext';
 import { fetchPacks } from '@/lib/api';
 import { dbCardToCard } from '@/lib/api';
 import { haptic } from '@/lib/telegram';
+import { useToast } from '@/components/Toast/Toast';
 import PackCard from '@/components/PackCard/PackCard';
 import GameCard from '@/components/GameCard/GameCard';
 import CardModal from '@/components/CardModal/CardModal';
@@ -21,12 +22,14 @@ interface PackWithCards {
   cardCount: number;
   gradient: string;
   emoji: string;
+  cover_url?: string;
   cards: Card[];
   cardIds: string[];
 }
 
 export default function ShopPage() {
   const { user, refreshUser, refreshInventory } = useUser();
+  const { showToast } = useToast();
   const [packs, setPacks] = useState<PackWithCards[]>([]);
   const [loading, setLoading] = useState(true);
   const [buying, setBuying] = useState(false);
@@ -70,7 +73,7 @@ export default function ShopPage() {
       const data = await res.json();
 
       if (!res.ok || !data.success) {
-        alert(data.error || 'Ошибка покупки');
+        showToast(data.error || 'Ошибка покупки', 'error');
         return;
       }
 
@@ -88,7 +91,7 @@ export default function ShopPage() {
 
     } catch (e) {
       console.error('Buy error:', e);
-      alert('Ошибка соединения');
+      showToast('Ошибка соединения', 'error');
     } finally {
       setBuying(false);
     }
@@ -141,7 +144,11 @@ export default function ShopPage() {
 
             <div className={styles.packModalHeader}>
               <div className={styles.packModalCover} style={{ background: selectedPack.gradient }}>
-                <span className={styles.packModalEmoji}>{selectedPack.emoji}</span>
+                {selectedPack.cover_url ? (
+                  <img src={selectedPack.cover_url} alt={selectedPack.name} className={styles.packModalCoverImg} />
+                ) : (
+                  <span className={styles.packModalEmoji}>{selectedPack.emoji}</span>
+                )}
               </div>
               <div className={styles.packModalInfo}>
                 <h3 className={styles.packModalName}>{selectedPack.name}</h3>

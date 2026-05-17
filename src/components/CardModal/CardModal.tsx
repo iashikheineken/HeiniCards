@@ -9,9 +9,10 @@ interface CardModalProps {
   card: Card;
   onClose: () => void;
   actions?: { label: string; icon: string; onClick: () => void; variant?: 'primary' | 'danger' | 'secondary' }[];
+  extraContent?: React.ReactNode;
 }
 
-export default function CardModal({ card, onClose, actions }: CardModalProps) {
+export default function CardModal({ card, onClose, actions, extraContent }: CardModalProps) {
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
@@ -62,6 +63,8 @@ export default function CardModal({ card, onClose, actions }: CardModalProps) {
             ))}
           </div>
         )}
+
+        {extraContent}
       </div>
     </div>
   );

@@ -3,11 +3,13 @@
 import React, { useState } from 'react';
 import styles from './page.module.css';
 import { useUser } from '@/context/UserContext';
+import { useToast } from '@/components/Toast/Toast';
 import { haptic } from '@/lib/telegram';
 import LoadingSkeleton from '@/components/LoadingSkeleton/LoadingSkeleton';
 
 export default function HomePage() {
   const { user, allCards, inventory, loading, refreshUser } = useUser();
+  const { showToast } = useToast();
   const [claiming, setClaiming] = useState(false);
   const [claimed, setClaimed] = useState(false);
 
@@ -34,15 +36,15 @@ export default function HomePage() {
         setClaimed(true);
         haptic.success();
         await refreshUser();
-        alert(`🎁 Получено ${data.reward} монет!`);
+        showToast(`Получено ${data.reward} монет!`, 'success', '🎁');
       } else {
         if (data.alreadyClaimed) {
           setClaimed(true);
         }
-        alert(data.error || 'Ошибка');
+        showToast(data.error || 'Ошибка', 'error');
       }
     } catch (e) {
-      alert('Ошибка соединения');
+      showToast('Ошибка соединения', 'error');
     } finally {
       setClaiming(false);
     }

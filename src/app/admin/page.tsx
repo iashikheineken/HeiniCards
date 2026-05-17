@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from './page.module.css';
 import { useUser } from '@/context/UserContext';
+import { useToast } from '@/components/Toast/Toast';
 import GameCard from '@/components/GameCard/GameCard';
 import type { Card, CardRank } from '@/data/cards';
 
@@ -59,6 +60,7 @@ function buildGradient(c1: string, c2: string): string {
 
 export default function AdminPage() {
   const { user } = useUser();
+  const { showToast } = useToast();
   const [tab, setTab] = useState<Tab>('cards');
   const [cards, setCards] = useState<AdminCard[]>([]);
   const [packs, setPacks] = useState<AdminPack[]>([]);
@@ -138,10 +140,10 @@ export default function AdminPage() {
             setEditPack({ ...editPack, cover_url: data.url });
           }
         } else {
-          alert(data.error || 'Ошибка загрузки');
+          showToast(data.error || 'Ошибка загрузки', 'error');
         }
       } catch (err) {
-        alert('Ошибка соединения');
+        showToast('Ошибка соединения', 'error');
       } finally {
         setUploading(false);
         input.value = '';
@@ -162,11 +164,11 @@ export default function AdminPage() {
         body: JSON.stringify({ userId: user.id, card: editCard }),
       });
       const data = await res.json();
-      if (data.error) { alert(data.error); return; }
-      alert(`Карта ${data.action === 'created' ? 'создана' : 'обновлена'}!`);
+      if (data.error) { showToast(data.error, 'error'); return; }
+      showToast(`Карта ${data.action === 'created' ? 'создана' : 'обновлена'}!`, 'success');
       setEditCard(null);
       loadData();
-    } catch (e) { alert('Ошибка'); } finally { setSaving(false); }
+    } catch (e) { showToast('Ошибка', 'error'); } finally { setSaving(false); }
   }
 
   // Delete card
@@ -180,8 +182,8 @@ export default function AdminPage() {
       });
       const data = await res.json();
       if (data.success) loadData();
-      else alert(data.error);
-    } catch (e) { alert('Ошибка'); }
+      else showToast(data.error, 'error');
+    } catch (e) { showToast('Ошибка', 'error'); }
   }
 
   // Save pack
@@ -195,11 +197,11 @@ export default function AdminPage() {
         body: JSON.stringify({ userId: user.id, pack: editPack, cardIds: editPack.cardIds }),
       });
       const data = await res.json();
-      if (data.error) { alert(data.error); return; }
-      alert('Пак сохранён!');
+      if (data.error) { showToast(data.error, 'error'); return; }
+      showToast('Пак сохранён!', 'success');
       setEditPack(null);
       loadData();
-    } catch (e) { alert('Ошибка'); } finally { setSaving(false); }
+    } catch (e) { showToast('Ошибка', 'error'); } finally { setSaving(false); }
   }
 
   // Delete pack
@@ -213,8 +215,8 @@ export default function AdminPage() {
       });
       const data = await res.json();
       if (data.success) loadData();
-      else alert(data.error);
-    } catch (e) { alert('Ошибка'); }
+      else showToast(data.error, 'error');
+    } catch (e) { showToast('Ошибка', 'error'); }
   }
 
   // Not admin

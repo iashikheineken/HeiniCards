@@ -35,6 +35,14 @@
   z-index: 1;
 }
 
+.packCoverImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+}
+
 
 .packInfo {
   padding: 10px;

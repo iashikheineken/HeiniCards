@@ -4,6 +4,7 @@
 
 .header {
   padding: 16px 0 8px;
+  overflow-x: hidden;
 }
 
 .title {
@@ -153,6 +154,8 @@
 /* Editor */
 .editor {
   animation: slideUp 0.3s ease;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 .editorTitle {
@@ -198,6 +201,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .field {
@@ -255,10 +260,13 @@
   align-items: center;
   gap: 8px;
   margin-top: 4px;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .colorInput {
   width: 40px;
+  min-width: 40px;
   height: 36px;
   border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: 6px;
@@ -272,6 +280,7 @@
 
 .gradientPreview {
   flex: 1;
+  min-width: 0;
   height: 36px;
   border-radius: 6px;
   border: 1px solid rgba(255, 255, 255, 0.08);
