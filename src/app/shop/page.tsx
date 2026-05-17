@@ -41,6 +41,7 @@ export default function ShopPage() {
     wonCards: Card[];
     poolCards: Card[];
     packName: string;
+    xpGained: number;
   } | null>(null);
 
   useEffect(() => {
@@ -87,6 +88,7 @@ export default function ShopPage() {
         wonCards,
         poolCards: pack.cards,
         packName: pack.name,
+        xpGained: data.xpGained || 0,
       });
 
     } catch (e) {
@@ -194,6 +196,7 @@ export default function ShopPage() {
           wonCards={rouletteData.wonCards}
           poolCards={rouletteData.poolCards}
           packName={rouletteData.packName}
+          xpGained={rouletteData.xpGained}
           onClose={handleRouletteClose}
         />
       )}

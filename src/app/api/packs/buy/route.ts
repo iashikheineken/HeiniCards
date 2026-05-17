@@ -112,10 +112,36 @@ export async function POST(request: NextRequest) {
     const cardsMap = new Map((wonCards || []).map(c => [c.id, c]));
     const orderedWonCards = wonCardIds.map(id => cardsMap.get(id)).filter(Boolean);
 
+    // 9. Add XP for opening a pack
+    const XP_PER_PACK = 50;
+    const { data: updatedUser } = await supabase
+      .from('users')
+      .update({ xp: (user.xp || 0) + XP_PER_PACK })
+      .eq('id', userId)
+      .select('xp')
+      .single();
+
+    // 10. Update quest progress
+    try {
+      await fetch(new URL('/api/quests/progress', request.url).toString(), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, action: 'buy_packs', amount: 1 }),
+      });
+      // Also track collect_cards
+      await fetch(new URL('/api/quests/progress', request.url).toString(), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, action: 'collect_cards', amount: pack.card_count }),
+      });
+    } catch (e) { /* quest progress is non-critical */ }
+
     return Response.json({
       success: true,
       wonCards: orderedWonCards,
       newBalance: user.balance - pack.price,
+      xpGained: XP_PER_PACK,
+      totalXp: updatedUser?.xp || ((user.xp || 0) + XP_PER_PACK),
     });
 
   } catch (e) {

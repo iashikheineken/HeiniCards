@@ -1,0 +1,148 @@
+/* Quests Page */
+.header { padding: 16px 0 8px; }
+.title {
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px var(--neon-cyan);
+  display: flex; align-items: center; gap: 8px;
+}
+
+.section { margin-bottom: 20px; }
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.sectionTitle {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+}
+
+.timer {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  color: var(--neon-orange);
+  text-shadow: 0 0 6px rgba(255, 136, 0, 0.3);
+}
+
+.loading, .empty {
+  text-align: center;
+  padding: 24px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* Quest List */
+.questList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.questCard {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 12px;
+  transition: all 0.3s;
+}
+
+.questCard:not(.questClaimed):hover {
+  border-color: rgba(0, 255, 255, 0.2);
+}
+
+.questClaimed {
+  opacity: 0.45;
+}
+
+.questTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.questInfo { flex: 1; }
+
+.questTitle {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+  line-height: 1.4;
+}
+
+.questDesc {
+  font-size: 11px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.questReward {
+  font-family: var(--font-pixel);
+  font-size: 8px;
+  color: var(--coin-color);
+  text-shadow: 0 0 6px rgba(255, 215, 0, 0.3);
+  white-space: nowrap;
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: rgba(255, 215, 0, 0.08);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+}
+
+.questBottom {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.progressBar {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-green));
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+.progressText {
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  color: var(--text-muted);
+  min-width: 32px;
+  text-align: right;
+}
+
+.claimBtn {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--neon-green);
+  background: rgba(57, 255, 20, 0.1);
+  color: var(--neon-green);
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.claimBtn:hover:not(:disabled) {
+  background: rgba(57, 255, 20, 0.2);
+}
+
+.doneCheck {
+  color: var(--neon-green);
+  font-size: 14px;
+}

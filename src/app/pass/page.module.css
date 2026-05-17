@@ -1,0 +1,161 @@
+/* SvinoPass Page */
+.header { padding: 16px 0 8px; }
+.title {
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  color: var(--neon-pink);
+  text-shadow: 0 0 10px var(--neon-pink);
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* XP Overview */
+.xpOverview {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 0, 255, 0.15);
+  border-radius: 14px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.xpLevel { text-align: center; min-width: 60px; }
+.xpLevelNum {
+  font-family: var(--font-pixel);
+  font-size: 24px;
+  color: var(--neon-pink);
+  text-shadow: 0 0 12px var(--neon-pink);
+  display: block;
+}
+.xpLevelLabel {
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.xpBarContainer { flex: 1; }
+.xpBarBg {
+  height: 14px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 7px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 0, 255, 0.1);
+}
+.xpBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--neon-pink), #ff66ff);
+  border-radius: 7px;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 10px var(--neon-pink);
+}
+.xpBarText {
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  text-align: right;
+  font-family: var(--font-pixel);
+  font-size: 6px;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-muted);
+  font-family: var(--font-pixel);
+  font-size: 8px;
+}
+
+/* Level List */
+.levelList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.levelRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--bg-card);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  transition: all 0.3s;
+}
+
+.levelRow.reached {
+  border-color: rgba(255, 0, 255, 0.2);
+  background: rgba(255, 0, 255, 0.03);
+}
+
+.levelRow.claimed {
+  opacity: 0.5;
+}
+
+.levelRow.locked { opacity: 0.6; }
+
+.levelNum {
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--neon-pink);
+  min-width: 28px;
+  text-align: center;
+}
+
+.locked .levelNum { color: var(--text-muted); }
+
+.levelXpBar {
+  width: 50px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.levelXpFill {
+  height: 100%;
+  background: var(--neon-pink);
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+.levelReward {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--text-primary);
+}
+
+.levelAction {
+  min-width: 60px;
+  text-align: right;
+}
+
+.claimBtn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--neon-green);
+  background: rgba(57, 255, 20, 0.1);
+  color: var(--neon-green);
+  font-family: var(--font-pixel);
+  font-size: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.claimBtn:hover:not(:disabled) {
+  background: rgba(57, 255, 20, 0.2);
+}
+
+.claimedBadge {
+  color: var(--neon-green);
+  font-size: 16px;
+}
+
+.lockedBadge {
+  font-size: 14px;
+  opacity: 0.4;
+}

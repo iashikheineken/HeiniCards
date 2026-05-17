@@ -103,6 +103,21 @@
   text-shadow: 0 0 6px currentColor;
 }
 
+/* XP Badge */
+.xpBadge {
+  margin-top: 12px;
+  padding: 8px 20px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255, 0, 255, 0.15), rgba(0, 255, 255, 0.15));
+  border: 1px solid rgba(255, 0, 255, 0.3);
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  color: var(--neon-pink);
+  text-shadow: 0 0 8px var(--neon-pink);
+  animation: slideUp 0.4s ease backwards;
+  animation-delay: 0.3s;
+}
+
 /* Collect button */
 .collectBtn {
   margin-top: 16px;

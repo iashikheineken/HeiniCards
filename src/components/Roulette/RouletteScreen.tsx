@@ -8,17 +8,14 @@ import { RANK_COLORS, RANK_LABELS } from '@/data/cards';
 import type { Card } from '@/data/cards';
 
 interface RouletteScreenProps {
-  /** Cards won from the server */
   wonCards: Card[];
-  /** All cards in the pack pool (for filling strips) */
   poolCards: Card[];
-  /** Pack name */
   packName: string;
-  /** Callback when user closes the screen */
+  xpGained?: number;
   onClose: () => void;
 }
 
-export default function RouletteScreen({ wonCards, poolCards, packName, onClose }: RouletteScreenProps) {
+export default function RouletteScreen({ wonCards, poolCards, packName, xpGained, onClose }: RouletteScreenProps) {
   const [finishedCount, setFinishedCount] = useState(0);
   const [showResults, setShowResults] = useState(false);
 
@@ -81,6 +78,9 @@ export default function RouletteScreen({ wonCards, poolCards, packName, onClose 
                 </div>
               ))}
             </div>
+            {xpGained && xpGained > 0 && (
+              <div className={styles.xpBadge}>⚡ +{xpGained} XP</div>
+            )}
             <button className={styles.collectBtn} onClick={onClose}>
               ✅ ЗАБРАТЬ ВСЕ
             </button>

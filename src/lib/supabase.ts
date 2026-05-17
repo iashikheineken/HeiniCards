@@ -46,6 +46,8 @@ export interface DbUser {
   username: string | null;
   display_name: string | null;
   balance: number;
+  xp: number;
+  svino_pass_level: number;
   is_admin: boolean;
   created_at: string;
   last_daily_reward: string | null;

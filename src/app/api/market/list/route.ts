@@ -57,6 +57,15 @@ export async function POST(request: NextRequest) {
       return Response.json({ error: listError.message }, { status: 500 });
     }
 
+    // Update quest progress
+    try {
+      await fetch(new URL('/api/quests/progress', request.url).toString(), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, action: 'sell_market', amount: 1 }),
+      });
+    } catch (e) { /* non-critical */ }
+
     return Response.json({ success: true, listing });
   } catch (e) {
     return Response.json({ error: 'Internal server error' }, { status: 500 });

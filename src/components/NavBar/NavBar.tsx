@@ -8,8 +8,10 @@ import styles from './NavBar.module.css';
 const tabs = [
   { path: '/', label: 'Меню', icon: '🏠' },
   { path: '/shop', label: 'Магазин', icon: '🛒' },
-  { path: '/inventory', label: 'Инвентарь', icon: '🎒' },
+  { path: '/inventory', label: 'Карты', icon: '🎒' },
   { path: '/market', label: 'Маркет', icon: '💰' },
+  { path: '/quests', label: 'Квесты', icon: '📋' },
+  { path: '/pass', label: 'Пасс', icon: '🐷' },
 ];
 
 export default function NavBar() {
