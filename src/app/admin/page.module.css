@@ -294,6 +294,63 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+/* Art URL section (above form grid) */
+.artSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+  max-width: 100%;
+}
+
+.artLabel {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.artInput {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: var(--text-primary);
+  font-size: 12px;
+  font-family: var(--font-body);
+  outline: none;
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.artInput:focus {
+  border-color: var(--neon-cyan);
+}
+
+.artUploadBtn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--neon-cyan);
+  background: rgba(0, 255, 255, 0.08);
+  color: var(--neon-cyan);
+  font-family: var(--font-pixel);
+  font-size: 7px;
+  cursor: pointer;
+  transition: all 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.artUploadBtn:hover:not(:disabled) {
+  background: rgba(0, 255, 255, 0.15);
+}
+
+.artUploadBtn:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
 /* Cover preview */
 .coverPreviewImg {
   width: 100%;

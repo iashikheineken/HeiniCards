@@ -315,6 +315,24 @@ export default function AdminPage() {
             </div>
           )}
 
+          {/* Art URL + Upload - separate from form grid */}
+          <div className={styles.artSection}>
+            <span className={styles.artLabel}>Арт (URL)</span>
+            <input
+              className={styles.artInput}
+              value={editCard.art_url}
+              onChange={e => setEditCard({ ...editCard, art_url: e.target.value })}
+              placeholder="https://..."
+            />
+            <button
+              className={styles.artUploadBtn}
+              onClick={() => handleUpload('art_url', 'cards')}
+              disabled={uploading}
+            >
+              {uploading ? '⏳ Загрузка...' : '📤 Загрузить с устройства'}
+            </button>
+          </div>
+
           <div className={styles.formGrid}>
             <label className={styles.field}>
               <span>Название</span>
@@ -376,15 +394,7 @@ export default function AdminPage() {
               </div>
             </div>
 
-            <label className={styles.fieldFull}>
-              <span>Арт (URL)</span>
-              <div className={styles.uploadRow}>
-                <input value={editCard.art_url} onChange={e => setEditCard({ ...editCard, art_url: e.target.value })} placeholder="https://..." />
-                <button className={styles.uploadBtn} onClick={() => handleUpload('art_url', 'cards')} disabled={uploading}>
-                  {uploading ? '⏳' : '📤'}
-                </button>
-              </div>
-            </label>
+
           </div>
 
           <div className={styles.editorActions}>
@@ -478,54 +488,63 @@ export default function AdminPage() {
               </div>
             </div>
 
-            <label className={styles.fieldFull}>
-              <span>Обложка пака (URL)</span>
-              <div className={styles.uploadRow}>
-                <input value={editPack.cover_url} onChange={e => setEditPack({ ...editPack, cover_url: e.target.value })} placeholder="https://..." />
-                <button className={styles.uploadBtn} onClick={() => handleUpload('cover_url', 'packs')} disabled={uploading}>
-                  {uploading ? '⏳' : '📤'}
-                </button>
-              </div>
-            </label>
+          </div>
 
-            {editPack.cover_url && (
-              <div className={styles.fieldFull}>
-                <img src={editPack.cover_url} alt="Cover" className={styles.coverPreviewImg} />
-              </div>
-            )}
+          {/* Cover URL + Upload - separate from form grid */}
+          <div className={styles.artSection}>
+            <span className={styles.artLabel}>Обложка пака (URL)</span>
+            <input
+              className={styles.artInput}
+              value={editPack.cover_url}
+              onChange={e => setEditPack({ ...editPack, cover_url: e.target.value })}
+              placeholder="https://..."
+            />
+            <button
+              className={styles.artUploadBtn}
+              onClick={() => handleUpload('cover_url', 'packs')}
+              disabled={uploading}
+            >
+              {uploading ? '⏳ Загрузка...' : '📤 Загрузить с устройства'}
+            </button>
+          </div>
 
-            <div className={styles.fieldFull}>
-              <div className={styles.checkRow}>
-                <input type="checkbox" checked={editPack.is_active} onChange={e => setEditPack({ ...editPack, is_active: e.target.checked })} />
-                <span>Активен в магазине</span>
-              </div>
+          {editPack.cover_url && (
+            <div style={{ marginTop: 8 }}>
+              <img src={editPack.cover_url} alt="Cover" className={styles.coverPreviewImg} />
             </div>
+          )}
 
-            {/* Card picker */}
-            <div className={styles.fieldFull}>
-              <span className={styles.fieldLabel}>Карты в паке:</span>
-              <div className={styles.cardPicker}>
-                {cards.map(card => {
-                  const isSelected = editPack.cardIds.includes(card.id!);
-                  return (
-                    <button
-                      key={card.id}
-                      className={`${styles.pickerCard} ${isSelected ? styles.pickerSelected : ''}`}
-                      onClick={() => {
-                        const newIds = isSelected
-                          ? editPack.cardIds.filter(id => id !== card.id)
-                          : [...editPack.cardIds, card.id!];
-                        setEditPack({ ...editPack, cardIds: newIds });
-                      }}
-                    >
-                      <span>{card.emoji}</span>
-                      <span className={styles.pickerName}>{card.name}</span>
-                      <span className={styles.pickerRank}>{card.rank}</span>
-                      {isSelected && <span className={styles.pickerCheck}>✓</span>}
-                    </button>
-                  );
-                })}
-              </div>
+          <div style={{ marginTop: 12 }}>
+            <div className={styles.checkRow}>
+              <input type="checkbox" checked={editPack.is_active} onChange={e => setEditPack({ ...editPack, is_active: e.target.checked })} />
+              <span>Активен в магазине</span>
+            </div>
+          </div>
+
+          {/* Card picker */}
+          <div style={{ marginTop: 12 }}>
+            <span className={styles.fieldLabel}>Карты в паке:</span>
+            <div className={styles.cardPicker}>
+              {cards.map(card => {
+                const isSelected = editPack.cardIds.includes(card.id!);
+                return (
+                  <button
+                    key={card.id}
+                    className={`${styles.pickerCard} ${isSelected ? styles.pickerSelected : ''}`}
+                    onClick={() => {
+                      const newIds = isSelected
+                        ? editPack.cardIds.filter(id => id !== card.id)
+                        : [...editPack.cardIds, card.id!];
+                      setEditPack({ ...editPack, cardIds: newIds });
+                    }}
+                  >
+                    <span>{card.emoji}</span>
+                    <span className={styles.pickerName}>{card.name}</span>
+                    <span className={styles.pickerRank}>{card.rank}</span>
+                    {isSelected && <span className={styles.pickerCheck}>✓</span>}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
